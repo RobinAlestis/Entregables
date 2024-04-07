@@ -63,18 +63,18 @@ class RobotController:
         
  # Define el movimiento del robot segun tipo de movimiento:   
     def execute_movement(self, goal): 
-        rospy.loginfo("Movimiento recibido")
-        result = ResponselienalorotationactionResult()
-        self.started = True
+        rospy.loginfo("Movimiento recibido") # Registra un mensaje de información indicando que se ha recibido un movimiento.
+        result = ResponselienalorotationactionResult() 
+        self.started = True # Inicializa la variable 'started' como 'True'
        
        # Calcular el ángulo de rotación para formar un triángulo equilátero
         rotation_angle = math.radians(goal.Distancia)  # 120 grados para un triángulo equilátero       
         self.posicion_inicial_x= self.odom_position_x
         self.posicion_inicial_y= self.odom_position_y
-        target_angle = self.odom_orientation_yaw + rotation_angle
+        target_angle = self.odom_orientation_yaw + rotation_angle # Calcula el ángulo objetivo sumando el ángulo actual del robot ('self.odom_orientation_yaw') y el ángulo de rotación deseado.
         
-        if target_angle >= math.radians(180):
-          target_angle-=math.radians(360)
+        if target_angle >= math.radians(180): #  Verifica si el ángulo objetivo calculado es mayor o igual a 180 grados (en radianes).
+          target_angle-=math.radians(360) #  Si el ángulo calculado excede 180 grados, resta 360 grados (en radianes) para obtener un ángulo equivalente pero en el rango [-π, π].
         self.target_z = target_angle 
         rospy.loginfo(target_angle)
         while self.started:  
