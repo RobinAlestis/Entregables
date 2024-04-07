@@ -1,0 +1,7 @@
+int32 Rotacion0  # Mensaje para que se mueva en linea recta
+int32 Distancia
+---
+bool MoveRobot
+---
+float32 Diferencia # te da un valor numerico
+
